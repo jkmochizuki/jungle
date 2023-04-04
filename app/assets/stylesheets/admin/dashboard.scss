@@ -1,0 +1,15 @@
+.card {
+  margin: 4rem;
+
+  .card-header {
+    color: rgba(0, 130, 29, 0.7);
+  }
+
+  button {
+    min-width: 110px;
+    padding-left: 1em;
+    padding-right: 1em;
+    background-color: rgba(0, 130, 29, 0.7);
+    color: white;
+  }
+}
