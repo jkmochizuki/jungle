@@ -1,6 +1,10 @@
 .card {
   margin: 4rem;
 
+  table > tbody  {
+    border-color: transparent;
+  }
+
   .card-header {
     color: rgba(0, 130, 29, 0.7);
   }
