@@ -1,12 +1,18 @@
 <section class="session-new">
   <h1>Login</h1>
   <br>
+  <% if flash[:alert].present? %>
+    <div class="alert alert-danger"><%= flash[:alert] %></div>
+  <% end %>
+    
   <%= form_tag sessions_path do %>
 
     Email: <%= text_field_tag :email %>&nbsp;&nbsp;
     Password: <%= password_field_tag :password %><br>
     <br>
-    <%= submit_tag "Submit", class: "btn btn-success"  %>
 
+    <br>  
+    <%= submit_tag "Submit", class: "btn btn-success"  %>
+    
   <% end %>
 </section>

@@ -1,9 +1,19 @@
 <section class="user-new">
   <h1>Register</h1>
   <br>
+   <% if flash[:error].present? %>
+      <div class="alert alert-danger">
+        <ul>
+          <% flash[:error].each do |error| %>
+            <li><%= error %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
   <%= form_for :user, url: users_path do |f| %>
 
-    Name: <%= f.text_field :name %>&nbsp;
+    Name: <%= f.text_field :name%>&nbsp;
     Email: <%= f.text_field :email %><br>
     <br>
     Password: <%= f.password_field :password %>&nbsp;

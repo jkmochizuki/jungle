@@ -10,7 +10,10 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to root_path
     else
-      flash[:error] = @user.errors.full_messages.first
+      @user.errors.full_messages.each do |error|
+        flash[:error] ||= []
+        flash[:error] << error
+      end
       redirect_to new_user_path
     end 
   end

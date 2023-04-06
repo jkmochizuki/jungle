@@ -1,7 +1,6 @@
 class AboutController < ApplicationController
 
-  def about
-    render 'index'
+  def index
   end
 
 end
