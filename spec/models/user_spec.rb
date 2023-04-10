@@ -59,8 +59,14 @@ RSpec.describe User, type: :model do
       @user = User.create(name: 'Jane Doe', email: 'TEST@test.com', password: '123456', password_confirmation: '123456')
     end
     
-    it 'authenticates the user credentials with case sensitive email' do
+    it 'authenticates the user credentials with case insensitive email' do
       authenticated_user = User.authenticate_with_credentials('TEST@test.com', '123456')
+      expect(authenticated_user).not_to be_nil
+      expect(authenticated_user.email.downcase).to eq('test@test.com')
+    end
+
+    it 'authenticates the user credentials if a visitor types in a few spaces before and/or after their email address' do
+      authenticated_user = User.authenticate_with_credentials('  test@test.com  ', '123456')
       expect(authenticated_user).not_to be_nil
       expect(authenticated_user.email.downcase).to eq('test@test.com')
     end
