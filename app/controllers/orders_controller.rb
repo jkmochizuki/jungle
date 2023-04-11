@@ -7,12 +7,12 @@ class OrdersController < ApplicationController
 
   def create
     charge = perform_stripe_charge
-    order  = create_order(charge)
+    order = create_order(charge)
     @line_item = LineItem.where(order_id: order.id)
 
     if order.valid?
-      NotifierMailer.receipt_email(order, @line_item).deliver_now
       empty_cart!
+      NotifierMailer.receipt_email(order, @line_item).deliver_now
       redirect_to order, notice: 'Your Order has been placed.'
     else
       redirect_to cart_path, flash: { error: order.errors.full_messages.first }
@@ -56,7 +56,9 @@ class OrdersController < ApplicationController
     end
 
     order.save!
+    order.update_product_quantities
     order
   end
+
 
 end
