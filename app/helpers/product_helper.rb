@@ -8,7 +8,7 @@ module ProductHelper
     half_star = (average_rating - full_stars) >= 0.5
     empty_stars = 5 - (full_stars + (half_star ? 1 : 0))
   
-    "★" * full_stars + (half_star ? "½" : "") + "☆" * empty_stars
+    "★" * full_stars + (half_star ? "★" : "") + "☆" * empty_stars
   end
   
 end
