@@ -2,13 +2,16 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+    @line_item = LineItem.where(order_id: @order.id)
   end
 
   def create
     charge = perform_stripe_charge
     order  = create_order(charge)
+    @line_item = LineItem.where(order_id: order.id)
 
     if order.valid?
+      NotifierMailer.receipt_email(order, @line_item).deliver_now
       empty_cart!
       redirect_to order, notice: 'Your Order has been placed.'
     else
@@ -22,7 +25,6 @@ class OrdersController < ApplicationController
   private
 
   def empty_cart!
-    # empty hash means no products in cart :)
     update_cart({})
   end
 
@@ -52,6 +54,7 @@ class OrdersController < ApplicationController
         total_price: product.price * quantity
       )
     end
+
     order.save!
     order
   end

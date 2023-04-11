@@ -1,0 +1,39 @@
+<p>Thank you for your order!</p>
+<p>
+Order details<br>
+--------------------------
+</p>
+<table>
+  <thead>
+    <tr>
+      <th colspan="2">Product</th>
+      <th>Unit Price</th>
+      <th>Quantity</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= @line_item.each do |item| %>
+      <tr>
+        <td><%= item.product.name %></td>
+        <td><%= item.product.price %></td>
+        <td><%= item.quantity %></td>
+        <td><%= number_to_currency(item.total_price_cents/100) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th colspan="4">
+        TOTAL:
+      </th>
+      <th>
+        <%= humanized_money_with_symbol @order.total_cents / 100.0 %>
+      </th>
+    </tr>
+  </tfoot>
+</table>
+<p>
+--------------------------
+</p>
+<p>We hope to see you again soon!</p>

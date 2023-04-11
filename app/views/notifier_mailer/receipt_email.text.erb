@@ -1,0 +1,16 @@
+Thank you for your order!
+
+Order details
+--------------------------
+
+<% @line_item.each do |item| %>
+    Product: <%= item.product.name %>
+    Unit Price: <%= item.product.price %>
+    Quantity: <%= item.quantity %>
+    Price: <%= number_to_currency(item.total_price_cents/100) %>
+<% end %>
+
+TOTAL: <%= humanized_money_with_symbol cart_subtotal_cents / 100.0 %>
+--------------------------
+
+We hope to see you again soon!
