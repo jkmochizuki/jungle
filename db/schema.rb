@@ -33,26 +33,12 @@ ActiveRecord::Schema.define(version: 2023_04_11_020929) do
     t.index ["product_id"], name: "index_line_items_on_product_id"
   end
 
-  create_table "options", id: :serial, force: :cascade do |t|
-    t.integer "poll_id"
-    t.text "description", null: false
-  end
-
   create_table "orders", force: :cascade do |t|
     t.integer "total_cents"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "stripe_charge_id"
     t.string "email"
-  end
-
-  create_table "polls", id: :serial, force: :cascade do |t|
-    t.integer "creator_id"
-    t.string "title", limit: 255, null: false
-    t.string "question", limit: 255, null: false
-    t.datetime "date_created", default: -> { "now()" }, null: false
-    t.datetime "date_completed"
-    t.boolean "complete", default: false, null: false
   end
 
   create_table "products", force: :cascade do |t|
@@ -84,17 +70,7 @@ ActiveRecord::Schema.define(version: 2023_04_11_020929) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "votes", id: :serial, force: :cascade do |t|
-    t.integer "voter_id"
-    t.integer "poll_id"
-    t.integer "option_id"
-    t.integer "rank_position", limit: 2, null: false
-  end
-
   add_foreign_key "line_items", "orders"
   add_foreign_key "line_items", "products"
-  add_foreign_key "options", "polls", name: "options_poll_id_fkey", on_delete: :cascade
   add_foreign_key "products", "categories"
-  add_foreign_key "votes", "options", name: "votes_option_id_fkey", on_delete: :cascade
-  add_foreign_key "votes", "polls", name: "votes_poll_id_fkey", on_delete: :cascade
 end
