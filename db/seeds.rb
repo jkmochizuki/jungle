@@ -217,6 +217,46 @@ cat3.products.create!({
   price: 79.99
 })
 
+## USERS
+
+User.destroy_all
+
+user1 = User.create!(name: 'Jane Smith', email: 'testjungleapp@gmail.com', password: '123456', password_confirmation: '123456')
+user2 = User.create!(name: 'Mary Wang', email: 'test@test.com', password: '123456', password_confirmation: '123456')
+
+## REVIEWS
+
+Review.destroy_all
+
+user1 = User.find_by_email('testjungleapp@gmail.com')
+product1 = Product.find(1)
+product1.reviews.create!({
+  description: "Great product! I highly recommend this product!",
+  rating: 5,
+  user_id: user1.id
+})
+
+user2 = User.find_by_email('test@test.com')
+product1 = Product.find(1)
+product1.reviews.create!({
+  description: "Yeah, OK.",
+  rating: 3,
+  user_id: user2.id
+})
+
+product2 = Product.find(2)
+product2.reviews.create!({
+  description: "I do not recommend this product!",
+  rating: 1,
+  user_id: user1.id
+})
+
+product3 = Product.find(3)
+product3.reviews.create!({
+  description: "Not bad!",
+  rating: 3,
+  user_id: user1.id
+})
 
 puts "DONE!"
 

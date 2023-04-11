@@ -19,5 +19,48 @@
       </div>
     </div>
   </article>
+  <br>
 
+  <article class="product-review">
+    <div>
+      <h4>Reviews: <%= @count_rating %></h4>
+      <% if @reviews.present? %>
+      <h5>Average rating: <%= average_rating_stars(@average_rating) %></h5>
+        <% @reviews.each do |review| %>
+          <div class="review">
+            <p><%= review.user.name %>: <%= review.description %></p>
+            <p>Rating: <%= review.rating %></p>
+            <% if @current_user == User.find(review.user_id) %>
+            <%= link_to 'Delete', product_review_path(review.product_id, review.id), method: :delete, class: 'btn btn-danger' %>
+            <% end %>
+          </div>
+        <% end %>
+      <% else %>
+          <p>There are no reviews yet for this product.</p>
+      <% end %>       
+    </div>
+  </article>
+
+  <div class="new-review">
+    <% if @current_user.present? %>
+      <br>
+      <div>
+        <h4 class="review-header">Write a Review</h4>
+        <%= form_for [@product, @review] do |f| %>
+          <div>
+            <%= f.label :rating %>
+            <%= f.select :rating, [ 1, 2, 3, 4, 5 ] %>
+          </div>
+          <div>
+            <%= f.label :description %>
+            <%= f.text_area :description %>
+          </div>
+          <br>
+          <div>
+            <%= f.submit "Submit", class: 'btn btn-success' %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 </section>

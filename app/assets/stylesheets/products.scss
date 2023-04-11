@@ -93,6 +93,96 @@ main section.categories-show {
           color: white;
         }
       }
+
+      .rating {
+        margin-bottom: 2rem;
+        margin-top: -0.6rem;
+        
+        span {
+          font-size: 18px;
+          color: rgba(0, 130, 29, 0.7);
+        }
+        
+      }
+    }
+    
+  }
+}
+
+.product-review {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    
+    .review {
+      border: 1px solid black;
+      padding: 1rem;
+      margin-bottom: 2rem;
+      width: 100%;
+      border-radius: 0.2rem;
+    }
+    
+    p {
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
+
+    h4, h5 {
+      margin-bottom: 1rem;
+    }
+  }
+
+  .btn-danger {
+    width: min-content;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 4px;
+  }
+}
+
+.new-review {
+  display: flex;
+  justify-content: start;
+  width: 100vw;
+
+  form {
+    display: flex;
+    flex-direction: column;
+
+    label {
+      font-weight: bold;
+      margin-top: 1em;
+      margin-bottom: 0.5em;
+    }
+
+    select, textarea {
+      width: 100%;
+      padding: 0.5em;
+      border-radius: 0.25em;
+      border: 1px solid #ccc;
+      margin-bottom: 1em;
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      padding: 0.5em;
+      background-color: #00821d;
+      color: white;
+      border: none;
+      border-radius: 0.25em;
+      font-size: 1.1em;
+      font-weight: bold;
+      cursor: pointer;
     }
   }
 }
+
